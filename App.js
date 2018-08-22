@@ -6,7 +6,21 @@ import { capitalizeFirstLetter } from './src/util'
 
 export default createStackNavigator({
   'Main': {
-    screen: PeoplePage
+    screen: PeoplePage,
+    navigationOptions: {
+      title: 'Contatos',
+      headerTintColor: 'white',
+      headerStyle:{
+        backgroundColor: '#6ca2f7',
+        borderBottomWidth: 1,
+        borderBottomColor: '#6ca2f7',
+        alignContent: 'center'
+      },
+      headerTitleStyle: {
+        fontSize: 30,
+        color: 'white'
+      }
+    }
   },
   'PeopleDetail': {
     screen: PeopleDetailPage,
@@ -16,24 +30,10 @@ export default createStackNavigator({
         title: capitalizeFirstLetter(peopleName),
         headerTitleStyle: {
           fontSize: 30,
-          color: 'white'
+          color: 'white',
+          alignSelf: 'center'
         }
       });
-    }
-  }
-}, {
-  navigationOptions: {
-    title: 'Pessoas',
-    headerTintColor: 'white',
-    headerStyle:{
-      backgroundColor: '#6ca2f7',
-      borderBottomWidth: 1,
-      borderBottomColor: '#6ca2f7'
-    },
-    headerTitleStyle: {
-      fontSize: 30,
-      color: 'white',
-      alignSelf: 'center'
     }
   }
 });
