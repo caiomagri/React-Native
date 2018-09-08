@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 import { createStore } from "redux";
 import todoListReducer from "./reducers";
 import devToolsEnhancer from "remote-redux-devtools";
@@ -14,6 +15,7 @@ export class TodoApp extends Component {
             <Provider store={store}>
                 <View style={styles.container}>
                     <TodoForm />
+                    <TodoList />
                 </View>
             </Provider>
         );
