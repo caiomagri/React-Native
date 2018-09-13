@@ -12,7 +12,10 @@ import firebase from "firebase";
 import FormRow from "../components/FormRow";
 import fireBaseConfig from "../config/config";
 
-export default class LoginPage extends React.Component {
+import { connect } from "react-redux";
+import { tryLogin } from "../actions";
+
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,22 +40,15 @@ export default class LoginPage extends React.Component {
             isLoading: true,
             message: ""
         });
-        const { mail, password } = this.state;
+        const { mail: email, password } = this.state;
 
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(mail, password)
-            .then(user => {
-                this.setState({
-                    message: "Sucesso!"
-                });
+        this.props
+            .tryLogin({ email, password })
+            .then(() => {
+                this.setState({ message: "Sucesso !" });
+                this.props.navigation.replace("main");
             })
-            .catch(error => {
-                this.setState({
-                    message: this.getMessageByErrorCode(error.code)
-                });
-            })
-            .then(() => this.setState({ isLoading: false }));
+            .catch(err => {});
     }
 
     getMessageByErrorCode(erroCode) {
@@ -132,3 +128,10 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }
 });
+
+export default connect(
+    null,
+    {
+        tryLogin
+    }
+)(LoginPage);
